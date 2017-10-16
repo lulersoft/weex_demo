@@ -2,12 +2,12 @@
     <div class="wrapper">
         <div class="login">
             <div class="input-wrapper">
-                <input @change="onchangeUserNumber" class="input" type="text" placeholder="账号 " autofocus="true" />
-                <!--<image class="input-img" src="resources/img/login_input_user_img.png"></image>-->
+		<input v-model="userNumber" class="input" type="text" placeholder="账号 " autofocus="true">
+
             </div>
             <div class="input-wrapper">
-                <input @change="onchangeUserPassword" class="input" type="password" placeholder="密码" value=""/>
-                <!--<image class="input-img" src="resources/img/login_input_pass_img.png"></image>-->
+		<input v-model="userPassword" class="input" type="password" placeholder="密码 ">
+
             </div>
             <div class="input-wrapper">
                 <div class="input-login" @click="login">
@@ -32,50 +32,29 @@
           }
         },
         methods:{
-            onchangeUserNumber (event) {
-                this.userNumber = event.value;
-            },
-            onchangeUserPassword(event) {
-                this.userPassword = event.value;
-            },
-          
-            findPassword(event) {
-                modal.toast({
-                  message: 'This is a toast',
-                  duration: 0.3
-                });
-            },
-          
-            register(event) {
-                modal.toast({
-                  message: 'This is a toast',
-                  duration: 2
-                });
-            },
          
             login(event) {
+              
                 if(this.userNumber.length < 1){
-                   modal.toast({
-                  message: '请输入账号',
-                  duration: 2
-                });
+                  modal.toast({
+                    message: '请输入账号',
+                    duration: 2
+                  });
                 return;
                  
                 }else if(this.userPassword.length < 1){
-                   modal.toast({
-                  message: '请输入密码',
-                  duration: 2
-                });
+                  modal.toast({
+                    message: '请输入密码',
+                    duration: 2
+                  });
                 return;
-                 
                 }
                 //JSON.stringify
                 var body=JSON.stringify({id:"2222222"});
                 var headers={username:this.userNumber,pwd:this.userPassword}
                 var v="code";
 
-                this.checkLogin('login/'+v,headers,body, res => {
-                //this.weexStar = res.ok ? res.data.stargazers_count : '(network error)'      
+                this.checkLogin('login/'+v,headers,body, res => {            
                 modal.toast({
                   message: JSON.stringify(res.data),
                   duration: 2
@@ -103,7 +82,7 @@
                     type: 'json',
                     /* headers:headers,*/
                     body:body,
-                    url: 'http://k.dunbovr.com/m/' + repo
+                    url: 'http://you_ip_address/m/' + repo
                 }, callback)
             }
         
